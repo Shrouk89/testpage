@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Viewer</title>
+</head>
+<body>
+    <button onclick="openMessageWindow()">View Message</button>
+
+    <script>
+        var messageWindow;
+        function openMessageWindow() {
+            messageWindow = window.open("", "", "width=500,height=300");
+            messageWindow.document.write("<p id='message'></p>");
+            messageWindow.document.close(); 
+            showMessage("Hello, I am here to helpppp", messageWindow);
+        }
+
+        function showMessage(text, win) {
+            var index = 0;
+            var messageElement = win.document.getElementById("message");
+            var interval = setInterval(function() {
+                if (index < text.length) {
+                    messageElement.innerHTML += text[index++];
+                } else {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>

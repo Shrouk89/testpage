@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .traffic-light {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80px;
+            background-color: black;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .light {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            border-radius: 50%;
+            background-color: gray;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;"> 
+
+    <div class="traffic-light">
+        <div id="redLight" class="light"></div>
+        <div id="yellowLight" class="light"></div>
+        <div id="greenLight" class="light"></div>
+    </div>
+
+    <div id="status">Stop</div>
+
+    <script>
+        var lights = ["red", "yellow", "green"];
+        var current = 0;
+
+        function updateTrafficLight() {
+        
+            document.getElementById("redLight").style.backgroundColor = "gray";
+            document.getElementById("yellowLight").style.backgroundColor = "gray";
+            document.getElementById("greenLight").style.backgroundColor = "gray";
+
+          
+            var activeLight = document.getElementById(lights[current] + "Light");
+            activeLight.style.backgroundColor = lights[current];
+
+         
+            var status = document.getElementById("status");
+            if (lights[current] === "red") {
+                status.innerHTML = "Stop";
+                status.style.color = "red";
+            } else if (lights[current] === "yellow") {
+                status.innerHTML = "Steady";
+                status.style.color = "orange";
+            } else {
+                status.innerHTML = "Go";
+                status.style.color = "green";
+            }
+
+            current = (current + 1) % lights.length;
+        }
+            updateTrafficLight();
+        
+        setInterval(updateTrafficLight, 2000);
+    </script>
+
+</body>
+</html>

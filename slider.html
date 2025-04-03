@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #slider-image {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .buttons {
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <button id="prev">⬅️ Previous</button>
+        <img id="slider-image" src="image.jpg" alt="Slider Image">
+        <button id="next">Next ➡️</button>
+    </div>
+
+    <div class="buttons">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+    </div>
+
+    <script>
+        var images = ["image.jpg", "image2.jpg", "image3.jpg", "image4.jpg"];
+        var currentIndex = 0;
+        var sliderImage = document.getElementById("slider-image");
+        var prevButton = document.getElementById("prev");
+        var nextButton = document.getElementById("next");
+        var startButton = document.getElementById("start");
+        var stopButton = document.getElementById("stop");
+        var interval;
+
+        function updateImage() {
+            sliderImage.src = images[currentIndex];
+        }
+
+        prevButton.onclick = function () {
+            currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+            updateImage();
+        };
+
+        nextButton.onclick = function () {
+            currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+            updateImage();
+        };
+
+        function startSlideshow() {
+            if (!interval) {
+                interval = setInterval(function () {
+                    currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+                    updateImage();
+                }, 2000); 
+            }
+        }
+
+        function stopSlideshow() {
+            clearInterval(interval);
+            interval = null;
+        }
+
+        startButton.onclick = startSlideshow;
+        stopButton.onclick = stopSlideshow;
+    </script>
+
+</body>
+</html>
